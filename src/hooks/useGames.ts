@@ -85,7 +85,7 @@
 
 // ----GameQuery
 
-import { GameQuery } from "../App";
+import { GameQuery } from "../Pages/Home";
 import useData from "./useData";
 
 
