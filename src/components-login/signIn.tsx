@@ -10,10 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
