@@ -1,24 +1,19 @@
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
   FormLabel,
-  HStack,
   Heading,
   Input,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function SignIn() {
+function SignUp() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -26,10 +21,10 @@ function SignIn() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((cred) => {
-        console.log("user logged in", cred.user);
-        navigate("/Home");
+        console.log("user created", cred.user);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);
@@ -47,8 +42,8 @@ function SignIn() {
     >
       <VStack spacing={4} align={"flex-start"} w="full">
         <VStack spacing={1} align={["flex-start", "center"]} w="full">
-          <Heading>Login</Heading>
-          <Text>Enter your e-mail and password to login</Text>
+          <Heading>Sign Up</Heading>
+          <Text>Create your account with e-mail and password</Text>
         </VStack>
         <form onSubmit={handleSubmit}>
           <FormControl>
@@ -74,29 +69,23 @@ function SignIn() {
             />
           </FormControl>
 
-          <HStack w="full" justify="space-between">
-            <Checkbox>Remember me.</Checkbox>
-            <Button variant="link" colorScheme="blue">
-              Forgot Password
-            </Button>
-          </HStack>
-
           <Button
+            mt={3}
             type="submit"
             rounded="none"
             colorScheme="blue"
             w={["full", "auto"]}
             alignSelf="end"
           >
-            Login
+            Sign Up
           </Button>
         </form>
         <p>
-          Need to SignUp ? <Link to="/SignUp">Create New Account</Link>
+          Need to Login ? <Link to="/">Login</Link>
         </p>
       </VStack>
     </Box>
   );
 }
 
-export default SignIn;
+export default SignUp;
